@@ -15,7 +15,7 @@ pks create-cluster k8s \
 
 # To expose a cluster
 
-- Add k8s.pks.${PCF_SUBDOMAIN_NAME}.${PCF_DOMAIN_NAME} entry in Cloud DNS pointing at the master node's external IP address
+- Add a `k8s.pks.${PCF_SUBDOMAIN_NAME}.${PCF_DOMAIN_NAME}` entry in Cloud DNS pointing at the master node's external IP address
 
 # To expose a deployment
 
