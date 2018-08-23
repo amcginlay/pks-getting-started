@@ -103,7 +103,7 @@ EOF
 # Open a proxy to your cluster
 
 ```bash
-kubectl proxy
+kubectl proxy &
 ```
 
 # Inspect the Kubernetes dashboard
