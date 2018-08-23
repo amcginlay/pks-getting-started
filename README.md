@@ -13,8 +13,8 @@
 
 1. Navigate to `https://${PCF_OPSMAN}/api/v0/deployed/products`
 1. Identify the guid for product with `"type": "pivotal-container-service"`
-1. Store this value in a shell variable named `PKS_GUID`
-1. Navigate to `https://${PCF_OPSMAN}/api/v0/deployed/products/${PKS_GUID}/credentials/.properties.uaa_admin_password`
+1. Store this value in a shell variable named `PCF_PKS_GUID`
+1. Navigate to `https://${PCF_OPSMAN}/api/v0/deployed/products/${PCF_PKS_GUID}/credentials/.properties.uaa_admin_password`
 1. Identify the value of `credential.value.secret`
 1. Store this value in a shell variable named `PCF_PKS_UAA_ADMIN_PASSWORD`
 
