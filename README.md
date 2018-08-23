@@ -20,7 +20,7 @@
 1. Identify the value of `credential.value.secret`
 1. Store this value in a shell variable named `PCF_PKS_UAA_ADMIN_PASSWORD`
 
-# To connect to PKS
+# Connect to PKS
 
 ```bash
 pks login \
@@ -30,7 +30,7 @@ pks login \
   --skip-ssl-validation
 ```
 
-# To create your Kubernetes cluster
+# Create your Kubernetes cluster
 
 ```bash
 pks create-cluster k8s \
@@ -67,18 +67,18 @@ gcloud dns record-sets transaction start --project ${GCP_PROJECT_ID} --zone=k8s
 gcloud dns record-sets transaction execute --project ${GCP_PROJECT_ID} --zone=k8s
 ```
 
-# To attach the client to your cluster
+# Attach the client to your cluster
 
 ```bash
 pks get-credentials k8s
 
 ```
 
-# To expose a cluster
+# Expose a cluster
 
 - Add a `k8s.pks.${PCF_SUBDOMAIN_NAME}.${PCF_DOMAIN_NAME}` entry in Cloud DNS pointing at the master node's external IP address
 
-# To expose a deployment
+# Expose a deployment
 
 - Deployed app must have NodePort service. Note its high-order port number
 - Add a firewall named "my-app" for that port with target set to "worker"
