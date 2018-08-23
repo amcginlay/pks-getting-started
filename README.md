@@ -1,10 +1,27 @@
+# Assumptions
+
+- You have installed PKS v1.1+ on PCF Ops Manager (GCP)
+- `PCF_SUBDOMAIN_NAME` and `PCF_DOMAIN_NAME` are set appropriately to identify your Ops Manager instance
+
+# Find the product guid for PKS
+
+- Navigate to `https://${PCF_SUBDOMAIN_NAME}.${PCF_DOMAIN_NAME}/api/v0/deployed/products`
+- Identify the guid for product with `"type": "pivotal-container-service"`
+- Store this value in a shell variable named `PKS_GUID`
+
+# Find the UAA admin password for PKS
+
+- Navigate to https://${PCF_SUBDOMAIN_NAME}.${PCF_DOMAIN_NAME}/api/v0/deployed/products/${PKS_GUID}/credentials/.properties.uaa_admin_password
+- Identify the value of `credential.value.secret`
+- Store this value in a shell variable named `PKS_UAA_ADMIN_PASSWORD`
+
 # To create a cluster
 
 ```bash
 pks login \
   -a api.pks.${PCF_SUBDOMAIN_NAME}.${PCF_DOMAIN_NAME} \
   -u admin \
-  -p ${UAA_ADMIN_PASSWORD}
+  -p ${PKS_UAA_ADMIN_PASSWORD}
   
 pks create-cluster k8s \
   --external-hostname k8s.pks.${PCF_SUBDOMAIN_NAME}.${PCF_DOMAIN_NAME} \
