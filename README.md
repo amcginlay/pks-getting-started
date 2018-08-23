@@ -48,7 +48,7 @@ K8S_MASTER_EXTERNAL_IP=$(gcloud compute instances list --project ${GCP_PROJECT_I
   jq --raw-output --arg V "${K8S_MASTER_INTERNAL_IP}" '.[] | select(.networkInterfaces[].networkIP | match ($V)) | .networkInterfaces[].accessConfigs[].natIP')
 ```
 
-# Create a DNC zone for your cluster
+# Create a DNS zone for your cluster
 
 ```bash
 gcloud dns managed-zones create k8s \
