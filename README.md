@@ -69,7 +69,9 @@ gcloud dns record-sets transaction execute --project ${GCP_PROJECT_ID} --zone=k8
 
 # Verify DNS
 
-This step may take about 5 minutes to propagate. AFter which time the following watch commands should yield different external IP addresses
+This step may take about 5 minutes to propagate.
+
+When run locally, the following watch commands should eventually yield different external IP addresses
 
 ```bash
 watch dig api.${PCF_PKS}
