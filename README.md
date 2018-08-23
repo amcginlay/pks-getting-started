@@ -82,7 +82,7 @@ pks get-credentials k8s
 # Allow remote access to the k8s dashboard
 
 ```bash
-kubectl create -f - <-EOF
+kubectl create -f - <<-EOF
 apiVersion: rbac.authorization.k8s.io/v1beta1
 kind: ClusterRoleBinding
 metadata:
