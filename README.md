@@ -6,13 +6,13 @@
 # Find the product guid for PKS
 
 - Execute `PCF_OPSMAN=pcf.${PCF_SUBDOMAIN_NAME}.${PCF_DOMAIN_NAME}`
-- Navigate to `https://${PCF_OPSMAN}/api/v0/deployed/products`
+- Navigate or curl to `https://${PCF_OPSMAN}/api/v0/deployed/products`
 - Identify the guid for product with `"type": "pivotal-container-service"`
 - Store this value in a shell variable named `PKS_GUID`
 
 # Find the UAA admin password for PKS
 
-- Navigate to `https://${PCF_OPSMAN}/api/v0/deployed/products/${PKS_GUID}/credentials/.properties.uaa_admin_password`
+- Navigate or curl to `https://${PCF_OPSMAN}/api/v0/deployed/products/${PKS_GUID}/credentials/.properties.uaa_admin_password`
 - Identify the value of `credential.value.secret`
 - Store this value in a shell variable named `PKS_UAA_ADMIN_PASSWORD`
 
