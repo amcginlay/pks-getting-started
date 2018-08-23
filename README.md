@@ -4,6 +4,7 @@
 - Your terraform.tfvars file used the `pks="true"` flag
 - You have deployed the PKS v1.1+ tile
 - `PCF_SUBDOMAIN_NAME` and `PCF_DOMAIN_NAME` are set appropriately to identify your PCF instance
+- You have `pks` and `kubectl` cli tools installed locally
 
 # Set shortcut variables
 - Execute `PCF_OPSMAN=pcf.${PCF_SUBDOMAIN_NAME}.${PCF_DOMAIN_NAME}`
