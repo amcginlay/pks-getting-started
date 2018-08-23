@@ -3,9 +3,12 @@
 - You have installed PKS v1.1+ on PCF Ops Manager (GCP)
 - `PCF_SUBDOMAIN_NAME` and `PCF_DOMAIN_NAME` are set appropriately to identify your Ops Manager instance
 
+# Set shortcut variables
+- Execute `PCF_OPSMAN=pcf.${PCF_SUBDOMAIN_NAME}.${PCF_DOMAIN_NAME}`
+- Execute `PCF_PKS=pks.${PCF_SUBDOMAIN_NAME}.${PCF_DOMAIN_NAME}`
+
 # Find the product guid for PKS
 
-- Execute `PCF_OPSMAN=pcf.${PCF_SUBDOMAIN_NAME}.${PCF_DOMAIN_NAME}`
 - Navigate to `https://${PCF_OPSMAN}/api/v0/deployed/products`
 - Identify the guid for product with `"type": "pivotal-container-service"`
 - Store this value in a shell variable named `PKS_GUID`
@@ -20,12 +23,12 @@
 
 ```bash
 pks login \
-  -a api.pks.${PCF_SUBDOMAIN_NAME}.${PCF_DOMAIN_NAME} \
+  -a ${PCF_OPSMAN} \
   -u admin \
   -p ${PKS_UAA_ADMIN_PASSWORD}
   
 pks create-cluster k8s \
-  --external-hostname k8s.pks.${PCF_SUBDOMAIN_NAME}.${PCF_DOMAIN_NAME} \
+  --external-hostname k8s.${PCF_PKS} \
   --plan small  \
   --num-nodes 1 \
   --wait
