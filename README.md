@@ -110,11 +110,7 @@ kubectl proxy
 
 Navigate to `http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy`
 
-# TODO TODO TODO TODO TODO TODO 
-
-# Expose a cluster
-
-- Add a `k8s.pks.${PCF_SUBDOMAIN_NAME}.${PCF_DOMAIN_NAME}` entry in Cloud DNS pointing at the master node's external IP address
+# TODO TODO TODO TODO TODO TODO
 
 # Expose a deployment
 
