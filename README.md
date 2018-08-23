@@ -1,6 +1,6 @@
 # Assumptions
 
-- You have installed PCF Ops Manager on GCP, using [Terraforming GCP](https://github.com/pivotal-cf/terraforming-gcp)
+- You installed PCF Ops Manager on GCP using [Terraforming GCP](https://github.com/pivotal-cf/terraforming-gcp)
 - Your terraform.tfvars file used the `pks="true"` flag
 - You have deployed the PKS v1.1+ tile
 - `PCF_SUBDOMAIN_NAME` and `PCF_DOMAIN_NAME` are set appropriately to identify your Ops Manager instance
