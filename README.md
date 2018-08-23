@@ -40,7 +40,7 @@ pks create-cluster k8s \
   --wait
 ```
 
-# discover the external IP of the master node
+# Discover the external IP of the master node
 
 ```bash
 K8S_MASTER_INTERNAL_IP=$(pks cluster k8s --json | jq --raw-output '.kubernetes_master_ips[0]')
