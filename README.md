@@ -84,6 +84,8 @@ watch dig k8s.${PCF_PKS}
 pks get-credentials k8s
 ```
 
+# 
+
 # Open a proxy to your cluster
 
 ```bash
