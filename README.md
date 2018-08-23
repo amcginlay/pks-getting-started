@@ -22,9 +22,10 @@
 
 ```bash
 pks login \
-  -a ${PCF_PKS} \
-  -u admin \
-  -p ${PKS_UAA_ADMIN_PASSWORD}
+  --api ${PCF_PKS} \
+  --username admin \
+  --password ${PKS_UAA_ADMIN_PASSWORD} \
+  --skip-ssl-validation
   
 pks create-cluster k8s \
   --external-hostname k8s.${PCF_PKS} \
