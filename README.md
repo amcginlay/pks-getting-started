@@ -11,13 +11,12 @@
 
 # Find the product guid and UAA admin password for PKS
 
-- Navigate to `https://${PCF_OPSMAN}/api/v0/deployed/products`
-- Identify the guid for product with `"type": "pivotal-container-service"`
-- Store this value in a shell variable named `PKS_GUID`
-
-- Navigate to `https://${PCF_OPSMAN}/api/v0/deployed/products/${PKS_GUID}/credentials/.properties.uaa_admin_password`
-- Identify the value of `credential.value.secret`
-- Store this value in a shell variable named `PKS_UAA_ADMIN_PASSWORD`
+1. Navigate to `https://${PCF_OPSMAN}/api/v0/deployed/products`
+1. Identify the guid for product with `"type": "pivotal-container-service"`
+1. Store this value in a shell variable named `PKS_GUID`
+1. Navigate to `https://${PCF_OPSMAN}/api/v0/deployed/products/${PKS_GUID}/credentials/.properties.uaa_admin_password`
+1. Identify the value of `credential.value.secret`
+1. Store this value in a shell variable named `PKS_UAA_ADMIN_PASSWORD`
 
 # To create a cluster
 
