@@ -23,7 +23,7 @@
 
 ```bash
 pks login \
-  -a ${PCF_OPSMAN} \
+  -a ${PCF_PKS} \
   -u admin \
   -p ${PKS_UAA_ADMIN_PASSWORD}
   
