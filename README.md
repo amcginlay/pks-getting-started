@@ -82,8 +82,19 @@ watch dig k8s.${PCF_PKS}
 
 ```bash
 pks get-credentials k8s
-
 ```
+
+# Open a proxy to your cluster
+
+```bash
+kubectl proxy
+```
+
+# Inspect the Kubernetes dashboard
+
+Navigate to `http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy`
+
+# TODO TODO TODO TODO TODO TODO 
 
 # Expose a cluster
 
