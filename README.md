@@ -19,7 +19,7 @@
 1. Identify the value of `credential.value.secret`
 1. Store this value in a shell variable named `PCF_PKS_UAA_ADMIN_PASSWORD`
 
-# To create a cluster
+# To connect to PKS
 
 ```bash
 pks login \
@@ -27,12 +27,22 @@ pks login \
   --username admin \
   --password ${PCF_PKS_UAA_ADMIN_PASSWORD} \
   --skip-ssl-validation
-  
+```
+
+# To create a Kubernetes cluster
+
+```bash
 pks create-cluster k8s \
   --external-hostname k8s.${PCF_PKS} \
   --plan small  \
   --num-nodes 1 \
   --wait
+```
+
+# To attach kubectl to our cluster
+
+```bash
+pks get-credentials k8s
 ```
 
 # To expose a cluster
