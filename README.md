@@ -11,7 +11,7 @@
 
 # Find the UAA admin password for PKS
 
-- Navigate to https://${PCF_SUBDOMAIN_NAME}.${PCF_DOMAIN_NAME}/api/v0/deployed/products/${PKS_GUID}/credentials/.properties.uaa_admin_password
+- Navigate to `https://${PCF_SUBDOMAIN_NAME}.${PCF_DOMAIN_NAME}/api/v0/deployed/products/${PKS_GUID}/credentials/.properties.uaa_admin_password`
 - Identify the value of `credential.value.secret`
 - Store this value in a shell variable named `PKS_UAA_ADMIN_PASSWORD`
 
