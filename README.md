@@ -22,7 +22,7 @@
 
 ```bash
 pks login \
-  --api ${PCF_PKS} \
+  --api api.${PCF_PKS} \
   --username admin \
   --password ${PKS_UAA_ADMIN_PASSWORD} \
   --skip-ssl-validation
