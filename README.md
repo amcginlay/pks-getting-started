@@ -51,20 +51,15 @@ K8S_MASTER_EXTERNAL_IP=$(gcloud compute instances list --project ${GCP_PROJECT_I
 # Create a DNS zone for your cluster
 
 ```bash
-gcloud dns managed-zones create k8s \
-  --project ${GCP_PROJECT_ID} \
-  --dns-name=${PCF_PKS} \
-  --description=
-
-gcloud dns record-sets transaction start --project ${GCP_PROJECT_ID} --zone=k8s
+gcloud dns record-sets transaction start --project ${GCP_PROJECT_ID} --zone=${PCF_SUBDOMAIN_NAME}-zone
 
   gcloud dns record-sets transaction \
     add ${K8S_MASTER_EXTERNAL_IP} \
     --name=k8s.${PCF_PKS}. \
     --project ${GCP_PROJECT_ID} \
-    --ttl=60 --type=A --zone=k8s
+    --ttl=60 --type=A --zone=${PCF_SUBDOMAIN_NAME}-zone
 
-gcloud dns record-sets transaction execute --project ${GCP_PROJECT_ID} --zone=k8s
+gcloud dns record-sets transaction execute --project ${GCP_PROJECT_ID} --zone=${PCF_SUBDOMAIN_NAME}-zone
 ```
 
 # Verify DNS
