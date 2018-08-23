@@ -100,7 +100,7 @@ subjects:
 EOF
 ```
 
-# Open a proxy to your cluster
+# Open a proxy in the background
 
 ```bash
 kubectl proxy &
