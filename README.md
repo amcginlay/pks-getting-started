@@ -3,7 +3,8 @@
 - You installed PCF Ops Manager on GCP using [Terraforming GCP](https://github.com/pivotal-cf/terraforming-gcp)
 - Your terraform.tfvars file used the `pks="true"` flag
 - You have deployed the PKS v1.1+ tile
-- `PCF_SUBDOMAIN_NAME` and `PCF_DOMAIN_NAME` are set appropriately to identify your PCF instance
+- `GCP_PROJECT_ID`, `PCF_SUBDOMAIN_NAME` and `PCF_DOMAIN_NAME` are set appropriately to identify your PCF instance
+- You have `gcloud` cli tool installed and authenticated
 - You have `pks` and `kubectl` cli tools installed locally (available from [PivNet](https://network.pivotal.io/products/pivotal-container-service/))
 
 # Set shortcut variables
@@ -29,7 +30,7 @@ pks login \
   --skip-ssl-validation
 ```
 
-# To create a Kubernetes cluster
+# To create your Kubernetes cluster
 
 ```bash
 pks create-cluster k8s \
@@ -39,10 +40,38 @@ pks create-cluster k8s \
   --wait
 ```
 
-# To attach kubectl to our cluster
+# discover the external IP of the master node
+
+```bash
+K8S_MASTER_INTERNAL_IP=$(pks cluster k8s --json | jq --raw-output '.kubernetes_master_ips[0]')
+K8S_MASTER_EXTERNAL_IP=$(gcloud compute instances list --project ${GCP_PROJECT_ID} --format json | \
+  jq --raw-output --arg V "${K8S_MASTER_INTERNAL_IP}" '.[] | select(.networkInterfaces[].networkIP | match ($V)) | .networkInterfaces[].accessConfigs[].natIP')
+```
+
+# Create a DNC zone for your cluster
+
+```bash
+gcloud dns managed-zones create k8s \
+  --project ${GCP_PROJECT_ID} \
+  --dns-name=${PCF_PKS} \
+  --description=
+
+gcloud dns record-sets transaction start --project ${GCP_PROJECT_ID} --zone=k8s
+
+  gcloud dns record-sets transaction \
+    add ${K8S_MASTER_EXTERNAL_IP} \
+    --name=k8s.${PCF_PKS}. \
+    --project ${GCP_PROJECT_ID} \
+    --ttl=60 --type=A --zone=k8s
+
+gcloud dns record-sets transaction execute --project ${GCP_PROJECT_ID} --zone=k8s
+```
+
+# To attach the client to your cluster
 
 ```bash
 pks get-credentials k8s
+
 ```
 
 # To expose a cluster
