@@ -79,7 +79,26 @@ watch dig k8s.${PCF_PKS}
 pks get-credentials k8s
 ```
 
-# 
+# Allow remote access to the k8s dashboard
+
+```bash
+kubectl create -f - <-EOF
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: ClusterRoleBinding
+metadata:
+  name: kubernetes-dashboard
+  labels:
+    k8s-app: kubernetes-dashboard
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cluster-admin
+subjects:
+- kind: ServiceAccount
+  name: kubernetes-dashboard
+  namespace: kube-system
+EOF
+```
 
 # Open a proxy to your cluster
 
