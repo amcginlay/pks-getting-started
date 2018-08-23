@@ -67,6 +67,15 @@ gcloud dns record-sets transaction start --project ${GCP_PROJECT_ID} --zone=k8s
 gcloud dns record-sets transaction execute --project ${GCP_PROJECT_ID} --zone=k8s
 ```
 
+# Verify DNS
+
+This step may take about 5 minutes to propagate. AFter which time the following watch commands should yield different external IP addresses
+
+```bash
+watch dig api.${PCF_PKS}
+watch dig k8s.${PCF_PKS}
+```
+
 # Attach the client to your cluster
 
 ```bash
