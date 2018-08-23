@@ -57,7 +57,7 @@ gcloud dns record-sets transaction start --project ${GCP_PROJECT_ID} --zone=${PC
     add ${K8S_MASTER_EXTERNAL_IP} \
     --name=k8s.${PCF_PKS}. \
     --project ${GCP_PROJECT_ID} \
-    --ttl=60 --type=A --zone=${PCF_SUBDOMAIN_NAME}-zone
+    --ttl=300 --type=A --zone=${PCF_SUBDOMAIN_NAME}-zone
 
 gcloud dns record-sets transaction execute --project ${GCP_PROJECT_ID} --zone=${PCF_SUBDOMAIN_NAME}-zone
 ```
