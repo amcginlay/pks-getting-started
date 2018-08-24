@@ -107,7 +107,7 @@ subjects:
 EOF
 ```
 
-# Open a local proxy to your cluster in the background
+# Open a tunnel from localhost to your cluster
 
 ```bash
 kubectl proxy &
