@@ -149,7 +149,7 @@ EOF
 
 # Create a Kubernetes Service
 
-Let our app know that we expect it to be discoverable as a `NodePort` service:
+Let our cluster know that we expect our app to be discoverable as a `NodePort` service:
 
 ```bash
 kubectl create -f - <<-EOF
