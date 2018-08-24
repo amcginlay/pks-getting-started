@@ -147,9 +147,9 @@ spec:
 EOF
 ```
 
-# Create a Kubernetes Service
+# Make our app externally discoverable
 
-Let our cluster know that we expect our app to be discoverable as a `NodePort` service:
+Let our cluster know that we wish to expose our app via a `NodePort` service:
 
 ```bash
 kubectl create -f - <<-EOF
