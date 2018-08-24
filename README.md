@@ -175,7 +175,7 @@ NODEPORT=$(kubectl get services --output=json | \
   jq '.items[] | select(.metadata.name=="web-service") | .spec.ports[0].nodePort')
 ```
 
-Add a firewall rule for that port
+Add a firewall rule for the web-service port
 
 ```bash
 gcloud compute firewall-rules create nginx \
@@ -186,7 +186,7 @@ gcloud compute firewall-rules create nginx \
   --project=${GCP_PROJECT_ID}
 ```
 
-Add a target pool to represent the workers:
+Add a target pool to represent all the worker nodes:
 
 ```bash
 gcloud compute target-pools create "nginx" \
@@ -201,10 +201,25 @@ for instance in $(gcloud compute instances list --project=${GCP_PROJECT_ID} --fi
 done
 ```
 
-- In Load Balancing (advanced):
-  - Add a target pool named "my-app" that explicitly targets all the worker VMs
-  - Create a forwarding rule named "my-app" that targets the port of the NodePort service
-  
-The forwarding rule will be assigned an external IP.
+Create a forwarding rule to expose our app:
 
-Navigate to `http:/[LOAD_BALANCER_IP]:[HIGH_ORDER_PORT_NUMBER]`
+```bash
+gcloud compute forwarding-rules create nginx2 \
+  --region=us-central1 \
+  --network-tier=STANDARD \
+  --ip-protocol=TCP \
+  --ports=${NODEPORT} \
+  --target-pool=nginx2 \
+  --project=${GCP_PROJECT_ID}
+```
+
+Extract the external IP address:
+
+```bash
+LOAD_BALANCER_IP=$(gcloud compute forwarding-rules list \
+  --filter="name:nginx2" \
+  --format="value(IPAddress)" \
+  --project=${GCP_PROJECT_ID})
+```
+
+Navigate to `http:/[LOAD_BALANCER_IP]:[NODEPORT]`
