@@ -148,7 +148,7 @@ kubectl get pods
 
 # Expose our deployment
 
-Create a service to expose a port for our webserver
+Create a service to expose a port for our webserver:
 
 ```bash
 kubectl create -f - <<-EOF
@@ -168,11 +168,39 @@ spec:
 EOF
 ```
 
+Extract the port:
 
+```bash
+NODEPORT=$(kubectl get services --output=json | \
+  jq '.items[] | select(.metadata.name=="web-service") | .spec.ports[0].nodePort')
+```
 
+Add a firewall rule for that port
 
-- Deployed app must have NodePort service. Note its high-order port number
-- Add a firewall named "my-app" for that port with target set to "worker"
+```bash
+gcloud compute firewall-rules create nginx \
+  --network=${PCF_SUBDOMAIN_NAME}-pcf-network \
+  --action=ALLOW \
+  --rules=tcp:${NODEPORT} \
+  --target-tags=worker \
+  --project=${GCP_PROJECT_ID}
+```
+
+Add a target pool to represent the workers:
+
+```bash
+gcloud compute target-pools create "nginx2" \
+  --region "us-central1" \
+  --project "${GCP_PROJECT_ID}"
+  
+for instance in $(gcloud compute instances list --project=${GCP_PROJECT_ID} --filter="tags.items:worker" --format="value(name)"); do
+  gcloud compute target-pools add-instances "nginx2" \
+    --project "ps-amcginlay" \
+    --instances-zone "us-central1-a" \
+    --instances "${instance}"
+done
+```
+
 - In Load Balancing (advanced):
   - Add a target pool named "my-app" that explicitly targets all the worker VMs
   - Create a forwarding rule named "my-app" that targets the port of the NodePort service
