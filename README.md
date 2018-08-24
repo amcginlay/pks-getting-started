@@ -240,7 +240,7 @@ LOAD_BALANCER_IP=$(gcloud compute forwarding-rules list \
   --project=${GCP_PROJECT_ID})
 ```
 
-# Verify application accessibility
+# Verify accessibility
 Navigate to the page resolved by executing:
 
 ```echo
