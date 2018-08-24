@@ -110,7 +110,7 @@ kubectl proxy &
 
 Navigate to `http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy`
 
-# Deploying the nginx docker image
+# Deploying the nginx webserver docker image
 
 ```bash
 kubectl create -f - <<-EOF
