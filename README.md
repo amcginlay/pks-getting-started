@@ -178,7 +178,7 @@ kubectl get pods
 kubectl get services
 ```
 
-Return to the Kubernetes dashboard to inspect the app properties via the web UI.
+Return to the Kubernetes dashboard to inspect these resources via the web UI.
 
 # Expose our app to the outside world
 
