@@ -222,4 +222,5 @@ LOAD_BALANCER_IP=$(gcloud compute forwarding-rules list \
   --project=${GCP_PROJECT_ID})
 ```
 
+# Verify application accessibility
 Navigate to `http:/[LOAD_BALANCER_IP]:[NODEPORT]`
