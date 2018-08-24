@@ -232,4 +232,4 @@ LOAD_BALANCER_IP=$(gcloud compute forwarding-rules list \
 ```
 
 # Verify application accessibility
-Navigate to `http:/[LOAD_BALANCER_IP]`
+Navigate to `http:/[LOAD_BALANCER_IP]:${SERVICE_PORT}`
