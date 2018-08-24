@@ -189,12 +189,12 @@ gcloud compute firewall-rules create nginx \
 Add a target pool to represent the workers:
 
 ```bash
-gcloud compute target-pools create "nginx2" \
+gcloud compute target-pools create "nginx" \
   --region "us-central1" \
   --project "${GCP_PROJECT_ID}"
   
 for instance in $(gcloud compute instances list --project=${GCP_PROJECT_ID} --filter="tags.items:worker" --format="value(name)"); do
-  gcloud compute target-pools add-instances "nginx2" \
+  gcloud compute target-pools add-instances "nginx" \
     --project "ps-amcginlay" \
     --instances-zone "us-central1-a" \
     --instances "${instance}"
