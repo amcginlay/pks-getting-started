@@ -146,9 +146,30 @@ kubectl get replicasets
 kubectl get pods
 ```
 
-# TODO TODO TODO TODO TODO TODO
+# Expose our deployment
 
-# Expose a deployment
+Create a service to expose a port for our webserver
+
+```bash
+kubectl create -f - <<-EOF
+apiVersion: v1
+kind: Service
+metadata:
+  name: web-service
+  labels:
+    run: web-service
+spec:
+  type: NodePort
+  ports:
+  - port: 80
+    protocol: TCP
+  selector:
+    app: nginx
+EOF
+```
+
+
+
 
 - Deployed app must have NodePort service. Note its high-order port number
 - Add a firewall named "my-app" for that port with target set to "worker"
