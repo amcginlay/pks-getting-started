@@ -206,9 +206,9 @@ WORKERS=$(gcloud compute instances list --project=${GCP_PROJECT_ID} --filter="ta
 
 for WORKER in ${WORKERS}; do
   gcloud compute target-pools add-instances "nginx" \
-    --project "ps-amcginlay" \
     --instances-zone "us-central1-a" \
-    --instances "${WORKER}"
+    --instances "${WORKER}" \
+    --project "${GCP_PROJECT_ID}"
 done
 ```
 
