@@ -55,7 +55,7 @@ K8S_MASTER_EXTERNAL_IP=$(gcloud compute instances list --project ${GCP_PROJECT_I
   jq --raw-output --arg V "${K8S_MASTER_INTERNAL_IP}" '.[] | select(.networkInterfaces[].networkIP | match ($V)) | .networkInterfaces[].accessConfigs[].natIP')
 ```
 
-# Create an A Record in DNS for your Kubernetes cluster
+# Create an A Record in the DNS for your Kubernetes cluster
 
 ```bash
 gcloud dns record-sets transaction start --project ${GCP_PROJECT_ID} --zone=${PCF_SUBDOMAIN_NAME}-zone
@@ -69,7 +69,7 @@ gcloud dns record-sets transaction start --project ${GCP_PROJECT_ID} --zone=${PC
 gcloud dns record-sets transaction execute --project ${GCP_PROJECT_ID} --zone=${PCF_SUBDOMAIN_NAME}-zone
 ```
 
-# Verify DNS
+# Verify the DNS changes
 
 This step may take about 5 minutes to propagate.
 
@@ -80,7 +80,7 @@ watch dig api.${PCF_PKS}
 watch dig k8s.${PCF_PKS}
 ```
 
-# Attach the client to your cluster
+# Attach the PKS client to your cluster
 
 ```bash
 pks get-credentials k8s
