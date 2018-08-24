@@ -138,9 +138,9 @@ spec:
 EOF
 ```
 
-# Expose our deployment
+# Create a Kubernetes Service
 
-Create a Kubernetes Service to expose a port for our app:
+Let our app know that we expect it to be discoverable:
 
 ```bash
 kubectl create -f - <<-EOF
@@ -160,7 +160,7 @@ spec:
 EOF
 ```
 
-# Inspect our deployment
+# Inspect our app
 
 ```bash
 kubectl get deployments
@@ -169,14 +169,20 @@ kubectl get pods
 kubectl get services
 ```
 
-Extract the port:
+Return to the Kubernetes dashboard to inspect the app properties via the web UI.
+
+# Expose our app to the outside world
+
+This section is more about manipulating GCP to expose an endpoint than PKS or k8s.
+
+Extract the port from the your Kubernetes Service:
 
 ```bash
 SERVICE_PORT=$(kubectl get services --output=json | \
   jq '.items[] | select(.metadata.name=="web-service") | .spec.ports[0].nodePort')
 ```
 
-Add a firewall rule for the web-service port
+Add a firewall rule for the web-service port, re-using the SERVICE_PORT for consistency:
 
 ```bash
 gcloud compute firewall-rules create nginx \
@@ -196,7 +202,7 @@ gcloud compute target-pools create "nginx" \
   
 WORKERS=$(gcloud compute instances list --project=${GCP_PROJECT_ID} --filter="tags.items:worker" --format="value(name)")
 
-for WORKER in $(WORKERS); do
+for WORKER in ${WORKERS}; do
   gcloud compute target-pools add-instances "nginx" \
     --project "ps-amcginlay" \
     --instances-zone "us-central1-a" \
