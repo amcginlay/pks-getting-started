@@ -35,7 +35,7 @@ pks login \
   --skip-ssl-validation
 ```
 
-# Create your Kubernetes cluster
+# Use the PKS client to create your Kubernetes cluster
 
 Increase the value of `--num-nodes` to 3 if you'd like to use multiple availability zones:
 
@@ -80,11 +80,13 @@ watch dig api.${PCF_PKS}
 watch dig k8s.${PCF_PKS}
 ```
 
-# Attach the PKS client to your cluster
+# Use the PKS client to cache the cluster creds
 
 ```bash
 pks get-credentials k8s
 ```
+
+This will create/modify the `~/.kube` directory used by the `kubectl` tool.
 
 # Allow remote access to the Kubernetes dashboard
 
