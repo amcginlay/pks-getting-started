@@ -181,7 +181,7 @@ Add a firewall rule for the web-service port
 gcloud compute firewall-rules create nginx \
   --network=${PCF_SUBDOMAIN_NAME}-pcf-network \
   --action=ALLOW \
-  --rules=tcp:80 \
+  --rules=tcp:${SERVICE_PORT} \
   --target-tags=worker \
   --project=${GCP_PROJECT_ID}
 ```
