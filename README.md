@@ -110,6 +110,34 @@ kubectl proxy &
 
 Navigate to `http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy`
 
+# Deploying the nginx docker image
+
+```bash
+kubectl create -f - <<-EOF
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webserver
+  labels:
+    app: nginx
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:alpine
+        ports:
+        - containerPort: 80
+EOF
+```
+
 # TODO TODO TODO TODO TODO TODO
 
 # Expose a deployment
