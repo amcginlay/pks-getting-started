@@ -193,52 +193,52 @@ This section is more about manipulating GCP to expose an endpoint than PKS or k8
 
 1. Add a firewall rule for the web-service port, re-using the SERVICE_PORT for consistency:
 
-```bash
-gcloud compute firewall-rules create nginx \
-  --network=${PCF_SUBDOMAIN_NAME}-pcf-network \
-  --action=ALLOW \
-  --rules=tcp:${SERVICE_PORT} \
-  --target-tags=worker \
-  --project=${GCP_PROJECT_ID}
-```
-
+   ```bash
+   gcloud compute firewall-rules create nginx \
+     --network=${PCF_SUBDOMAIN_NAME}-pcf-network \
+     --action=ALLOW \
+     --rules=tcp:${SERVICE_PORT} \
+     --target-tags=worker \
+     --project=${GCP_PROJECT_ID}
+   ```
+   
 1. Add a target pool to represent all the worker nodes:
-
-```bash
-gcloud compute target-pools create "nginx" \
-  --region "us-central1" \
-  --project "${GCP_PROJECT_ID}"
-  
-WORKERS=$(gcloud compute instances list --project=${GCP_PROJECT_ID} --filter="tags.items:worker" --format="value(name)")
-
-for WORKER in ${WORKERS}; do
-  gcloud compute target-pools add-instances "nginx" \
-    --instances-zone "us-central1-a" \
-    --instances "${WORKER}" \
-    --project "${GCP_PROJECT_ID}"
-done
-```
-
+   
+   ```bash
+   gcloud compute target-pools create "nginx" \
+     --region "us-central1" \
+     --project "${GCP_PROJECT_ID}"
+     
+   WORKERS=$(gcloud compute instances list --project=${GCP_PROJECT_ID} --filter="tags.items:worker"    --format="value(name)")
+   
+   for WORKER in ${WORKERS}; do
+     gcloud compute target-pools add-instances "nginx" \
+       --instances-zone "us-central1-a" \
+       --instances "${WORKER}" \
+       --project "${GCP_PROJECT_ID}"
+   done
+   ```
+   
 1. Create a forwarding rule to expose our app:
-
-```bash
-gcloud compute forwarding-rules create nginx \
-  --region=us-central1 \
-  --network-tier=STANDARD \
-  --ip-protocol=TCP \
-  --ports=${SERVICE_PORT} \
-  --target-pool=nginx \
-  --project=${GCP_PROJECT_ID}
-```
-
+   
+   ```bash
+   gcloud compute forwarding-rules create nginx \
+     --region=us-central1 \
+     --network-tier=STANDARD \
+     --ip-protocol=TCP \
+     --ports=${SERVICE_PORT} \
+     --target-pool=nginx \
+     --project=${GCP_PROJECT_ID}
+   ```
+   
 1. Extract the external IP address:
-
-```bash
-LOAD_BALANCER_IP=$(gcloud compute forwarding-rules list \
-  --filter="name:nginx" \
-  --format="value(IPAddress)" \
-  --project=${GCP_PROJECT_ID})
-```
+   
+   ```bash
+   LOAD_BALANCER_IP=$(gcloud compute forwarding-rules list \
+     --filter="name:nginx" \
+     --format="value(IPAddress)" \
+     --project=${GCP_PROJECT_ID})
+   ```
 
 # Verify accessibility
 Navigate to the page resolved by executing:
