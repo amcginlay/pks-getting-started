@@ -81,7 +81,7 @@ watch dig k8s.${PCF_PKS}
 pks get-credentials k8s
 ```
 
-# Allow remote access to the k8s dashboard
+# Allow remote access to the Kubernetes dashboard
 
 ```bash
 kubectl create -f - <<-EOF
