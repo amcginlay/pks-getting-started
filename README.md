@@ -138,14 +138,6 @@ spec:
 EOF
 ```
 
-# Inspect our deployment
-
-```bash
-kubectl get deployments
-kubectl get replicasets
-kubectl get pods
-```
-
 # Expose our deployment
 
 Create a Kubernetes Service to expose a port for our app:
@@ -166,6 +158,15 @@ spec:
   selector:
     app: nginx
 EOF
+```
+
+# Inspect our deployment
+
+```bash
+kubectl get deployments
+kubectl get replicasets
+kubectl get pods
+kubectl get services
 ```
 
 Extract the port:
