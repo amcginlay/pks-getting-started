@@ -184,14 +184,14 @@ Return to the Kubernetes dashboard to inspect these resources via the web UI.
 
 This section is more about manipulating GCP to expose an endpoint than PKS or k8s.
 
-Extract the port from the your Kubernetes Service:
+1. Extract the port from the your Kubernetes Service:
 
-```bash
-SERVICE_PORT=$(kubectl get services --output=json | \
-  jq '.items[] | select(.metadata.name=="web-service") | .spec.ports[0].nodePort')
-```
+   ```bash
+   SERVICE_PORT=$(kubectl get services --output=json | \
+     jq '.items[] | select(.metadata.name=="web-service") | .spec.ports[0].nodePort')
+   ```
 
-Add a firewall rule for the web-service port, re-using the SERVICE_PORT for consistency:
+1. Add a firewall rule for the web-service port, re-using the SERVICE_PORT for consistency:
 
 ```bash
 gcloud compute firewall-rules create nginx \
@@ -202,7 +202,7 @@ gcloud compute firewall-rules create nginx \
   --project=${GCP_PROJECT_ID}
 ```
 
-Add a target pool to represent all the worker nodes:
+1. Add a target pool to represent all the worker nodes:
 
 ```bash
 gcloud compute target-pools create "nginx" \
@@ -219,7 +219,7 @@ for WORKER in ${WORKERS}; do
 done
 ```
 
-Create a forwarding rule to expose our app:
+1. Create a forwarding rule to expose our app:
 
 ```bash
 gcloud compute forwarding-rules create nginx \
@@ -231,7 +231,7 @@ gcloud compute forwarding-rules create nginx \
   --project=${GCP_PROJECT_ID}
 ```
 
-Extract the external IP address:
+1. Extract the external IP address:
 
 ```bash
 LOAD_BALANCER_IP=$(gcloud compute forwarding-rules list \
