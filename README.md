@@ -32,11 +32,13 @@ pks login \
 
 # Create your Kubernetes cluster
 
+Increase the value of `--num-nodes` to 3 if you'd like to use multiple availability zones:
+
 ```bash
 pks create-cluster k8s \
   --external-hostname k8s.${PCF_PKS} \
   --plan small  \
-  --num-nodes 3 \
+  --num-nodes 1 \
   --wait
 ```
 
