@@ -36,7 +36,7 @@ pks login \
 pks create-cluster k8s \
   --external-hostname k8s.${PCF_PKS} \
   --plan small  \
-  --num-nodes 1 \
+  --num-nodes 3 \
   --wait
 ```
 
