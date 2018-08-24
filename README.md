@@ -148,7 +148,7 @@ kubectl get pods
 
 # Expose our deployment
 
-Create a service to expose a port for our webserver:
+Create a Kubernetes Service to expose a port for our app:
 
 ```bash
 kubectl create -f - <<-EOF
@@ -171,7 +171,7 @@ EOF
 Extract the port:
 
 ```bash
-NODEPORT=$(kubectl get services --output=json | \
+SERVICE_PORT=$(kubectl get services --output=json | \
   jq '.items[] | select(.metadata.name=="web-service") | .spec.ports[0].nodePort')
 ```
 
@@ -181,7 +181,7 @@ Add a firewall rule for the web-service port
 gcloud compute firewall-rules create nginx \
   --network=${PCF_SUBDOMAIN_NAME}-pcf-network \
   --action=ALLOW \
-  --rules=tcp:${NODEPORT} \
+  --rules=tcp:${SERVICE_PORT} \
   --target-tags=worker \
   --project=${GCP_PROJECT_ID}
 ```
@@ -193,23 +193,25 @@ gcloud compute target-pools create "nginx" \
   --region "us-central1" \
   --project "${GCP_PROJECT_ID}"
   
-for instance in $(gcloud compute instances list --project=${GCP_PROJECT_ID} --filter="tags.items:worker" --format="value(name)"); do
+WORKERS=$(gcloud compute instances list --project=${GCP_PROJECT_ID} --filter="tags.items:worker" --format="value(name)")
+
+for WORKER in $(WORKERS); do
   gcloud compute target-pools add-instances "nginx" \
     --project "ps-amcginlay" \
     --instances-zone "us-central1-a" \
-    --instances "${instance}"
+    --instances "${WORKER}"
 done
 ```
 
 Create a forwarding rule to expose our app:
 
 ```bash
-gcloud compute forwarding-rules create nginx2 \
+gcloud compute forwarding-rules create nginx \
   --region=us-central1 \
   --network-tier=STANDARD \
   --ip-protocol=TCP \
   --ports=${NODEPORT} \
-  --target-pool=nginx2 \
+  --target-pool=nginx \
   --project=${GCP_PROJECT_ID}
 ```
 
@@ -217,10 +219,10 @@ Extract the external IP address:
 
 ```bash
 LOAD_BALANCER_IP=$(gcloud compute forwarding-rules list \
-  --filter="name:nginx2" \
+  --filter="name:nginx" \
   --format="value(IPAddress)" \
   --project=${GCP_PROJECT_ID})
 ```
 
 # Verify application accessibility
-Navigate to `http:/[LOAD_BALANCER_IP]:[NODEPORT]`
+Navigate to `http:/[LOAD_BALANCER_IP]:[SERVICE_PORT]`
