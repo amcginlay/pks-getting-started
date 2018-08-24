@@ -13,7 +13,12 @@
 
 # Find the product guid and UAA admin password for PKS
 
-1. Navigate to `https://${PCF_OPSMAN}/api/v0/deployed/products`
+1. Navigate to the page resolved by executing:
+   
+   ```bash
+   echo "https://${PCF_OPSMAN}/api/v0/deployed/products"
+   ```
+
 1. Identify the guid for the product with `"type": "pivotal-container-service"`
 1. Store this value in a shell variable named `PCF_PKS_GUID`
 1. Navigate to the page resolved by executing:
