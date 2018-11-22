@@ -5,7 +5,7 @@
 - `GCP_PROJECT_ID`, `PCF_SUBDOMAIN_NAME` and `PCF_DOMAIN_NAME` are set appropriately to identify your PCF instance
 - You have `gcloud` cli tool installed and authenticated
 - You have `pks` and `kubectl` cli tools installed locally (available from [PivNet](https://network.pivotal.io/products/pivotal-container-service/)).
-This is required __locally__ because you will be invoking `kubectl proxy` to create a tunnel that a browser can use to view the Kubernetes dashboard.
+This is required __locally__ because you will be invoking `kubectl proxy` to create a tunnel so your browser can display the Kubernetes dashboard.
 
 # Set shortcut variables
 - Execute `PCF_OPSMAN=pcf.${PCF_SUBDOMAIN_NAME}.${PCF_DOMAIN_NAME}`
