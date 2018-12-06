@@ -1,6 +1,6 @@
 # Assumptions
 
-- You installed PCF Ops Manager for PKS on GCP using [Terraforming GCP](https://github.com/pivotal-cf/terraforming-gcp) - maybe check [this](https://github.com/amcginlay/ops-manager-automation) out
+- You installed PCF Ops Manager for PKS on GCP using [Terraforming GCP](https://github.com/pivotal-cf/terraforming-gcp) - maybe check [this](https://github.com/amcginlay/ops-manager-automation) out and complete the [2-step prerequsites](https://github.com/amcginlay/ops-manager-automation/blob/master/README.md#prerequisites-1).
 - You have deployed the PKS v1.2+ tile
 - `GCP_PROJECT_ID`, `PCF_SUBDOMAIN_NAME` and `PCF_DOMAIN_NAME` are set appropriately to identify your PCF instance
 - You have `gcloud` cli tool installed and authenticated
