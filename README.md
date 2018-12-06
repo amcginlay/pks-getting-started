@@ -1,6 +1,6 @@
 # Assumptions
 
-- You installed PCF Ops Manager for PKS on GCP using [Terraforming GCP](https://github.com/pivotal-cf/terraforming-gcp) - maybe just complete the [2-step prerequsites](https://github.com/amcginlay/ops-manager-automation/blob/master/README.md#prerequisites-1) from this guide then [set up authentication](https://github.com/amcginlay/ops-manager-automation/blob/master/README.md#configure-authenticationsh) for the Ops Manager.
+- You installed PCF Ops Manager for PKS on GCP - just complete the [2-step prerequsites](https://github.com/amcginlay/ops-manager-automation/blob/master/README.md#prerequisites-1) from this guide then [set up authentication](https://github.com/amcginlay/ops-manager-automation/blob/master/README.md#configure-authenticationsh) for the Ops Manager.
 - You have [deployed the BOSH director and PKS v1.2+ tile](https://github.com/amcginlay/ops-manager-automation/blob/master/README.md#pks)
 - `GCP_PROJECT_ID`, `PCF_SUBDOMAIN_NAME` and `PCF_DOMAIN_NAME` are set appropriately to identify your PCF instance
 - You have `gcloud` cli tool installed and authenticated
