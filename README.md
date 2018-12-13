@@ -4,7 +4,7 @@
 - [Set up authentication](https://github.com/amcginlay/ops-manager-automation/blob/master/README.md#configure-authenticationsh) for the Ops Manager.
 - [Deploy the BOSH director and PKS v1.2+ tile](https://github.com/amcginlay/ops-manager-automation/blob/master/README.md#deploy-pks-plus-bosh-director)
 - Set `GCP_PROJECT_ID`, `PCF_SUBDOMAIN_NAME` and `PCF_DOMAIN_NAME` appropriately to identify your PCF instance
-- [Install](https://cloud.google.com/sdk/install) and authenticate Google Cloud SDK using `gcloud auth login`
+- We recommend you perform all `gcloud` commands from the Jumpbox where the Google Cloud SDK in pre-installed
 - Install `pks` and `kubectl` cli tools locally (available from [PivNet](https://network.pivotal.io/products/pivotal-container-service/)).
 This is required __locally__ because you will be invoking `kubectl proxy` to create a tunnel, enabling your browser to display the Kubernetes dashboard.
 
