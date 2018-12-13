@@ -6,9 +6,9 @@
 - Set `GCP_PROJECT_ID`, `PCF_SUBDOMAIN_NAME` and `PCF_DOMAIN_NAME` appropriately to identify your PCF instance.
   You should do this for both your local machine and the jumpbox.
 - We recommend you perform all `gcloud` commands from the Jumpbox where the Google Cloud SDK in pre-installed
-- Install `pks` cli tool on the jumpbox (available from [PivNet](https://network.pivotal.io/products/pivotal-container-service/)).
-- Install `kubectl` cli tool locally if possible, but on the jumpbox if necessary (available from [PivNet](https://network.pivotal.io/products/pivotal-container-service/)).
-We recommend you install this __locally__ because you will be invoking `kubectl proxy` to create a tunnel, enabling your browser to display the Kubernetes dashboard.
+- Install `pks` and `kubectl` cli tools on the local machine.
+We recommend you install these tools __locally__ because `pks` is used to build the configuration used by `kubectl` and you will be invoking `kubectl proxy` to create a tunnel, enabling your browser to display the Kubernetes dashboard.
+These tools are available from [PivNet](https://network.pivotal.io/products/pivotal-container-service/)).
 
 # Set shortcut variables
 - Execute `PCF_OPSMAN=pcf.${PCF_SUBDOMAIN_NAME}.${PCF_DOMAIN_NAME}`
