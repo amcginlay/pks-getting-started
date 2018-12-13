@@ -7,7 +7,7 @@
   You should do this for both your local machine and the jumpbox.
 - We recommend you perform all `gcloud` commands from the Jumpbox where the Google Cloud SDK in pre-installed
 - Install `pks` cli tool on the jumpbox (available from [PivNet](https://network.pivotal.io/products/pivotal-container-service/)).
-- Install `kubectl` cli tool locally if possible, on the jumpbox otherwise (available from [PivNet](https://network.pivotal.io/products/pivotal-container-service/)).
+- Install `kubectl` cli tool locally if possible, but on the jumpbox if necessary (available from [PivNet](https://network.pivotal.io/products/pivotal-container-service/)).
 We recommend you install this __locally__ because you will be invoking `kubectl proxy` to create a tunnel, enabling your browser to display the Kubernetes dashboard.
 
 # Set shortcut variables
